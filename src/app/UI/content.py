@@ -58,20 +58,21 @@ class main_app(ctk.CTkFrame):
 
 
     def ui_test(self):
-        self.splitted_window=tk.PanedWindow(self, orient="vertical")
+        self.splitted_window=tk.PanedWindow(self, orient="horizontal")
         
-        left = tk.PanedWindow(self.splitted_window, orient="horizontal")
-        left_top = ctk.CTkFrame(left) #Replace by tabs
-        left.add(left_top)
+        left_frame=ctk.CTkFrame(self.splitted_window)
+        left_paned = tk.PanedWindow(left_frame, orient="vertical")
         
-#         left.bottom=ctk.CTkFrame(left)
-#         left.add(left.bottom)
+        left_top = ctk.CTkFrame(left_paned) #Replace by tabs
+        left_paned.add(left_top)
+        left_bottom=ctk.CTkFrame(left_paned)
+        left_paned.add(left_bottom)
+        left_paned.pack()
         
-        
-#         right = ctk.CTkFrame() #Create a placeholder to be used by extensions
+        right_frame = ctk.CTkFrame(self.splitted_window) #Create a placeholder to be used by extensions
 
-        self.splitted_window.add(left)
-#         self.splitted_window.add(right)
+        self.splitted_window.add(left_frame)
+        self.splitted_window.add(right_frame)
         self.splitted_window.grid(sticky="nsew")
 
 
