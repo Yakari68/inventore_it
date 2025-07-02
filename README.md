@@ -3,6 +3,7 @@
 TODO
 - [X] DB Structure
 - [X] Reading them
+- [ ] Show their content in the interface
 - [ ] Import items/inventories
 - [ ] Edit and save DBs
 - [ ] Tabs with different interfaces
