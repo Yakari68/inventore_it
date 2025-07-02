@@ -121,13 +121,15 @@ Separator:
 
 ---
 ==marked==
-2^10^
-H~2~O
+2<sup>10</sup>
+H<sup>2</sub>O
 `Inline monospace`
-> Citation
+> Quote
 
 [Link to Google](https://google.com/)
 Image:  ![Alt text](img.jpg =60x50)
+
+<!-- Commented text -->
 
 Tables:
 
@@ -137,3 +139,19 @@ Tables:
 |Row 2 is quite long           |Some content but larger so you can see everything is centered                     |Have you ever heard          |
 |Row 3            |Some content                     |About Lord Vraxx???          |
 
+Notes:
+
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
+> [!TIP]
+> Helpful advice for doing things better or more easily.
+
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
+
+> [!WARNING]
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advises about risks or negative outcomes of certain actions.
