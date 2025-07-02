@@ -1,3 +1,4 @@
+![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)
 # inventore It! Inventory manager
 
 ####################
