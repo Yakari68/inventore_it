@@ -4,6 +4,7 @@ TODO
 - [X] DB Structure
 - [X] Reading them
 - [ ] Import items/inventories
+- [ ] Edit and save DBs
 - [ ] Tabs with different interfaces
 - [ ] Panned window
 
