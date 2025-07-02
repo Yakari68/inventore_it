@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)  ![Static Badge](https://img.shields.io/badge/Python-3.10.11-00CC00)  ![Static Badge](https://img.shields.io/badge/CustomTKinter-5.2.2-0088CC)
+![inventore It! logo](./assets/icon.svg) ![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)  ![Static Badge](https://img.shields.io/badge/Python-3.10.11-00CC00)  ![Static Badge](https://img.shields.io/badge/CustomTKinter-5.2.2-0088CC)
 
 TODO
 - [X] DB Structure
@@ -139,12 +139,13 @@ Separator:
 ---
 ==marked==
 2<sup>10</sup>
-H<sup>2</sub>O
+H<sub>2</sub>O
 `Inline monospace`
 > Quote
 
 [Link to Google](https://google.com/)
-Image:  ![Alt text](img.jpg =60x50)
+
+Image:  ![Alt text](img.jpg)
 
 <!-- Commented text -->
 
