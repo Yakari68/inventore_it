@@ -7,9 +7,10 @@ TODO
 - [ ] Import items/inventories
 - [ ] Edit and save DBs
 - [ ] Tabs with different interfaces
-- [ ] Panned window
+- [X] Panned window
 
 Later
+- [ ] Undo, Redo, whatever other important functionalities
 - [ ] Exports to many formats
 - [ ] Reading other formats
 - [ ] Import from many formats
