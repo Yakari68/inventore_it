@@ -1,4 +1,5 @@
-![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)
+![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)  ![Static Badge](https://img.shields.io/badge/Python%20version-3.10.11-00CC00)
+
 # inventore It! Inventory manager
 
 ####################
