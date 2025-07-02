@@ -137,7 +137,6 @@ blocks
 Separator:
 
 ---
-==marked==
 2<sup>10</sup>
 H<sub>2</sub>O
 `Inline monospace`
