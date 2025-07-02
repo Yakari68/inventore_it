@@ -10,6 +10,9 @@ class main_app(ctk.CTkFrame):
         super().__init__(master)
         self.grid(sticky="nsew")
         self.logo_path = "./app/UI/assets/icons/icon256x256.png"
+        
+        self.splitted_window = None
+
 
 # May be removed
         self.tabview = None
@@ -23,8 +26,9 @@ class main_app(ctk.CTkFrame):
         if not s.db_instance: 
             self.show_logo()
         else:
+            self.ui_test()
 #             self.show_ui()
-            self.show_tabs() # Will probably be removed
+#             self.show_tabs() # Will probably be removed
 
     def clear(self):
         for widget in self.winfo_children():
@@ -53,7 +57,22 @@ class main_app(ctk.CTkFrame):
         pass
 
 
+    def ui_test(self):
+        self.splitted_window=tk.PanedWindow(self, orient="vertical")
+        
+        left = tk.PanedWindow(self.splitted_window, orient="horizontal")
+        left_top = ctk.CTkFrame(left) #Replace by tabs
+        left.add(left_top)
+        
+#         left.bottom=ctk.CTkFrame(left)
+#         left.add(left.bottom)
+        
+        
+#         right = ctk.CTkFrame() #Create a placeholder to be used by extensions
 
+        self.splitted_window.add(left)
+#         self.splitted_window.add(right)
+        self.splitted_window.grid(sticky="nsew")
 
 
 
