@@ -1,10 +1,24 @@
-![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)  ![Static Badge](https://img.shields.io/badge/Python%20version-3.10.11-00CC00)
+![Static Badge](https://img.shields.io/badge/Alpha%20Phase-FF0000)  ![Static Badge](https://img.shields.io/badge/Python-3.10.11-00CC00)  ![Static Badge](https://img.shields.io/badge/CustomTKinter-5.2.2-0088CC)
+
+TODO
+- [X] DB Structure
+- [X] Reading them
+- [ ] Import items/inventories
+- [ ] Tabs with different interfaces
+- [ ] Panned window
+
+Later
+- [ ] Exports to many formats
+- [ ] Reading other formats
+- [ ] Import from many formats
+- [ ] API
+- [ ] Extensions 
 
 # inventore It! Inventory manager
 
-####################
----**WORK IN PROGRESS**---
-####################
+####################</br>
+---**WORK IN PROGRESS**---</br>
+####################</br>
 
 Based on Python and CustomTKinter
 
