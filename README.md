@@ -175,7 +175,3 @@ Notes:
 > Advises about risks or negative outcomes of certain actions.
 
 Badges: https://shields.io/badges/static-badge
-<<<<<<< HEAD
-
-=======
->>>>>>> 4adfa89 ('test')
