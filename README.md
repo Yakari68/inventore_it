@@ -156,3 +156,6 @@ Notes:
 
 > [!CAUTION]
 > Advises about risks or negative outcomes of certain actions.
+
+Badges: https://shields.io/badges/static-badge
+
