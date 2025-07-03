@@ -10,7 +10,7 @@ class main_app(ctk.CTkFrame):
         super().__init__(master)
         self.grid(sticky="nsew")
         self.logo_path = "./app/UI/assets/icons/icon256x256.png"
-        
+        self.right_frame=None
         self.splitted_window = None
 
 
@@ -58,23 +58,22 @@ class main_app(ctk.CTkFrame):
 
 
     def ui_test(self):
-        self.splitted_window=tk.PanedWindow(self, orient="horizontal")
-        
-        left_frame=ctk.CTkFrame(self.splitted_window)
+        self.splitted_window = tk.PanedWindow(self, orient="horizontal")
+
+        left_frame = ctk.CTkFrame(self.splitted_window)
         left_paned = tk.PanedWindow(left_frame, orient="vertical")
-        
-        left_top = ctk.CTkFrame(left_paned) #Replace by tabs
+
+        left_top = ctk.CTkFrame(left_paned)  # Replace by tabs
         left_paned.add(left_top)
-        left_bottom=ctk.CTkFrame(left_paned)
+        left_bottom = ctk.CTkFrame(left_paned)
         left_paned.add(left_bottom)
         left_paned.pack()
-        
-        right_frame = ctk.CTkFrame(self.splitted_window) #Create a placeholder to be used by extensions
+
+        self.right_frame = ctk.CTkFrame(self.splitted_window)  # Make it accessible as an instance attribute
 
         self.splitted_window.add(left_frame)
-        self.splitted_window.add(right_frame)
+        self.splitted_window.add(self.right_frame)
         self.splitted_window.grid(sticky="nsew")
-
 
 
 
