@@ -4,6 +4,7 @@ import os
 import shutil
 import time
 import app.settings.settings as s
+from app.logics.id_creator import id_creator
 
 # Here for debug purposes, something may crash if not
 # here (some kind of coconut.jpg function idk)
@@ -127,15 +128,19 @@ def create_database(name,path,db_format,inventories):
         except Exception as e:
             print(e)
             break
-        now=time.strftime("%Y%m%d%H%M%S", time.localtime())
+        now_str=time.strftime("%Y%m%d%H%M%S", time.localtime())
+        now=int(now_str)
         
 #### ADD A LOGIC FOR MULTIPLE FORMATS
   # Maybe create outer files for each db formats, or one big that
   # contain every function to create any type of db
 #### CREATION FOR IVTDB (v1)
-        e_str=["{\"name\":\"",name,
-               "\",\n\"created\":",now,
-               ",\n\"updated\":",now,
+## Add a log.state creation for inventories and db
+        db_id=str(id_creator(now))
+        e_str=["{\"id\":\"",db_id,
+               "\",\n\"name\":\"",name,
+               "\",\n\"created\":",now_str,
+               ",\n\"updated\":",now_str,
                ",\n\"owner\":\"",os.getlogin(),
                "\",\n\"format\": \"",select_format(db_format),"\"\n}"]
         string=""
@@ -146,7 +151,8 @@ def create_database(name,path,db_format,inventories):
             f.close()
         os.mkdir(path+f"/Inventories")
         for inventory in inventories:
-            ivt_path=path+f"/Inventories/{inventory}"
+            ivt_id=str(id_creator(now))
+            ivt_path=path+f"/Inventories/{ivt_id}"
             os.mkdir(ivt_path)
             os.mkdir(ivt_path+f"/logs")
             fields="["
@@ -155,9 +161,10 @@ def create_database(name,path,db_format,inventories):
                 if not fld==inventories[inventory][-1]:
                     fields+=","
             fields+="]"
-            e_str=["{\"name\":\"",inventory,
-                   "\",\n\"created\":",now,
-                   ",\n\"updated\":",now,
+            e_str=["{\"id\":\"",ivt_id,
+                   "\",\n\"name\":\"",inventory,
+                   "\",\n\"created\":",now_str,
+                   ",\n\"updated\":",now_str,
                    ",\n\"fields\":",fields,"\n}"]
             string=""
             for i in range(len(e_str)):
