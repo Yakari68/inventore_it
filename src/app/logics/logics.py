@@ -24,7 +24,7 @@ class Item:
         self.properties=properties
 
     def read_properties(self):
-        print(self.properties)
+        print("Item properties: ",self.properties)
 
     def get_properties(self,info_file):
         with z.ZipFile(self.path,'r') as archive:
@@ -41,7 +41,7 @@ class Inventory:
         self.items=[]
 
     def read_properties(self):
-        print(self.properties)
+        print("IVT Properties: ",self.properties)
 
     def get_properties(self,info_file):
         with z.ZipFile(self.path,'r') as archive:
@@ -53,6 +53,7 @@ class Inventory:
         with z.ZipFile(self.path,'r') as archive:
             with archive.open(item_file) as item:
                 self.items.append(Item(j.load(item)))
+                print("Item added: ", self.items[-1].properties['id'])
         self.read_properties()
 
 class Database:
@@ -68,7 +69,7 @@ class Database:
         self.build_inventories()
 
     def read_properties(self):
-        print(self.properties)
+        print("DB Properties: ", self.properties)
 
     def get_properties(self):
         with z.ZipFile(self.path,'r') as archive:
@@ -83,21 +84,23 @@ class Database:
         self.read_properties()
 
     def current_inventories(self):
-        print(self.inventories.keys())
+        print("Current IVTs :",self.inventories.keys())
         
     def build_inventories(self):
-        print(self.files_in_db)
+        print("Files in DB: ",self.files_in_db)
         for f in self.files_in_db:
             if f=='db.info':
                 continue
-            key=f[12:f.rfind('/')]
-            print(key)
-            if not key in self.inventories:
+            key=f[12:f.find('/',13)]
+            print("Key: ",key)
+            if (not key in self.inventories):
                 print("New key: ", key, self.path)
                 self.inventories[key]=Inventory(key,self.path)
             if f[-3:]=='itm':
+                print("Add an itm")
                 self.inventories[key].get_item(f)
             if f[-4:]=='info':
+                print("Read infos")
                 self.inventories[key].get_properties(f)
 
 # May move to settings.py

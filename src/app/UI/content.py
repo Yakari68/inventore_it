@@ -4,6 +4,7 @@ from PIL import Image
 import app.logics.logics as lg
 import os
 import app.settings.settings as s
+from .tabs import Tabs
 
 class main_app(ctk.CTkFrame):
     def __init__(self, master):
@@ -63,13 +64,20 @@ class main_app(ctk.CTkFrame):
         left_frame = ctk.CTkFrame(self.splitted_window)
         left_paned = tk.PanedWindow(left_frame, orient="vertical")
 
-        left_top = ctk.CTkFrame(left_paned)  # Replace by tabs
+        left_top = ctk.CTkFrame(left_paned)
+###TEST
+        try:
+            self.tabview=Tabs(left_top)
+            self.tabview.pack(fill="both",expand=True)
+        except Exception as e:
+            print("Erreur: ",e)
+###END TEST
         left_paned.add(left_top)
         left_bottom = ctk.CTkFrame(left_paned)
         left_paned.add(left_bottom)
-        left_paned.pack()
+        left_paned.pack(expand=True, fill='both')
 
-        self.right_frame = ctk.CTkFrame(self.splitted_window)  # Make it accessible as an instance attribute
+        self.right_frame = ctk.CTkFrame(self.splitted_window)
 
         self.splitted_window.add(left_frame)
         self.splitted_window.add(self.right_frame)
