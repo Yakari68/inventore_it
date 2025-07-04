@@ -3,10 +3,10 @@
 TODO
 - [X] DB Structure
 - [X] Reading them
-- [ ] Show their content in the interface
+- [X] Show their content in the interface
 - [ ] Import items/inventories
 - [ ] Edit and save DBs
-- [ ] Tabs with different interfaces
+- [ ] Tabs with different interfaces (to test and improve)
 - [X] Panned window
 
 Later
@@ -55,9 +55,11 @@ In inventore It!, **databases** are zipfiles containing json files. Databases ar
 	        ├── ivt.info
 	        ├── log.state
 	        ├── logs/
-	        ├── Items
-	            ├── some_item.itm
-	            ├── another_one.itm
+	        ├── Items/
+	            ├── some_item/
+                        ├── some_item.itm
+                        ├── logs/
+	            ├── another_one/
 	    ├── inventory2/
 	        ├── ivt.info
 	        ├── log.state
