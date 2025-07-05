@@ -96,12 +96,12 @@ class Database:
                 key = parts[1]
                 print("Key: ",key)
             else:
-                print(f"[⚠️] Fichier ignoré : {f}")
+                print("Ignored file: ",f)
                 continue
             if (not key in self.inventories):
                 print("New key: ", key, self.path)
                 self.inventories[key]=Inventory(key,self.path)
-            if f[-3:]=='itm':
+            if f.endswith(".itm"):
                 print("Add an itm")
                 self.inventories[key].get_item(f)
             if f.endswith("ivt.info"):
