@@ -14,10 +14,7 @@ class main_app(ctk.CTkFrame):
         self.right_frame=None
         self.splitted_window = None
 
-
-# May be removed
         self.tabview = None
-        self.table_frame = None
 
         self.display()
 
@@ -27,9 +24,7 @@ class main_app(ctk.CTkFrame):
         if not s.db_instance: 
             self.show_logo()
         else:
-            self.ui_test()
-#             self.show_ui()
-#             self.show_tabs() # Will probably be removed
+            self.show_ui()
 
     def clear(self):
         for widget in self.winfo_children():
@@ -48,7 +43,7 @@ class main_app(ctk.CTkFrame):
         label = ctk.CTkLabel(frame, text="", image=logo)
         label.grid(row=0, column=0, padx=10, pady=10)
     
-    def show_ui(self):
+
 # Show action bar: new db, open db, save, export, undo, redo, new inventory, edit inventory props, new component, delete component
 # Build paned window: vertical split
 # Build paned left window: horizontal split
@@ -58,7 +53,7 @@ class main_app(ctk.CTkFrame):
         pass
 
 
-    def ui_test(self):
+    def show_ui(self):
         self.splitted_window = tk.PanedWindow(self, orient="horizontal")
 
         left_frame = ctk.CTkFrame(self.splitted_window)
@@ -66,11 +61,9 @@ class main_app(ctk.CTkFrame):
 
         left_top = ctk.CTkFrame(left_paned)
 ###TEST
-        try:
-            self.tabview=Tabs(left_top)
-            self.tabview.pack(fill="both",expand=True)
-        except Exception as e:
-            print("Erreur: ",e)
+        self.tabview=Tabs(left_top)
+        self.tabview.pack(fill="both",expand=True)
+
 ###END TEST
         left_paned.add(left_top)
         left_bottom = ctk.CTkFrame(left_paned)
@@ -82,43 +75,3 @@ class main_app(ctk.CTkFrame):
         self.splitted_window.add(left_frame)
         self.splitted_window.add(self.right_frame)
         self.splitted_window.grid(sticky="nsew")
-
-
-
-#TO DO: COMPLETE REWORK    
-    def show_tabs(self):
-        self.tabbar_frame = ctk.CTkFrame(self)    
-        self.tabbar_frame.pack(fill="x", padx=10, pady=(10, 0))
-        self.tabview = ctk.CTkTabview(self.tabbar_frame)
-        self.tabview.pack(expand=True, fill="both", padx=10, pady=10)
-        self.tab_content_frame = ctk.CTkFrame(self)
-        self.tab_content_frame.pack(fill="both", expand=True, padx=10, pady=(0, 10))
-        if not len(s.db.inventories)==0:
-            for ivt in s.db.inventories:
-                tab = self.tabview.add(ivt)
-                self.build_table(tab, s.db.inventories[ivt])
-        else:
-            print("Empty Database")
-
-    def build_table(self, parent, current_ivt):
-        self.table_frame = ctk.CTkFrame(parent)
-        self.table_frame.pack(expand=True, fill="both")
-        rows=current_ivt.items.copy()
-        cols = current_ivt.properties['fields'].copy()
-        print(len(rows))
-        if not len(rows)==0:
-            i=0
-            for r in rows:
-                j=0
-                for c in cols:
-                    value = r.properties[c] if c in r.properties else ""
-                    entry = ctk.CTkEntry(self.table_frame, width=100)
-                    entry.insert(0, value)
-                    entry.grid(row=i, column=j, padx=2, pady=2, sticky="nsew")
-                    j+=1
-                i+=1
-                if i>len(rows):
-                    break
-        else:
-            print("Empty inventory")
-#END TO DO

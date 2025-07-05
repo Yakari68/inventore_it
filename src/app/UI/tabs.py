@@ -20,7 +20,9 @@ class Tabs(ctk.CTkTabview):
     def db_tabs(self):
         self.tabs_dict['Inventories'] = {}
         for ivt_key, ivt in s.db.inventories.items():
+            print("properties:",ivt.properties)
             tab_name = ivt.properties['name']
+            print('Tab Name:', tab_name)
             self.tabs_dict['Inventories'][ivt_key] = {
                 'name': tab_name,
                 'content': ivt  #class Iventory

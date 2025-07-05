@@ -91,15 +91,20 @@ class Database:
         for f in self.files_in_db:
             if f=='db.info':
                 continue
-            key=f[12:f.find('/',13)]
-            print("Key: ",key)
+            parts = f.split('/')
+            if len(parts) >= 2 and parts[0] == "Inventories":
+                key = parts[1]
+                print("Key: ",key)
+            else:
+                print(f"[⚠️] Fichier ignoré : {f}")
+                continue
             if (not key in self.inventories):
                 print("New key: ", key, self.path)
                 self.inventories[key]=Inventory(key,self.path)
             if f[-3:]=='itm':
                 print("Add an itm")
                 self.inventories[key].get_item(f)
-            if f[-4:]=='info':
+            if f.endswith("ivt.info"):
                 print("Read infos")
                 self.inventories[key].get_properties(f)
 
@@ -152,12 +157,16 @@ def create_database(name,path,db_format,inventories):
         with open(path+"/db.info","w",encoding='utf-8') as f:
             f.write(string)
             f.close()
+        logst=open(path+'/log.state',"w",encoding='utf-8')
+        logst.close()
         os.mkdir(path+f"/Inventories")
         for inventory in inventories:
             ivt_id=str(id_creator(now))
             ivt_path=path+f"/Inventories/{ivt_id}"
             os.mkdir(ivt_path)
             os.mkdir(ivt_path+f"/logs")
+            logst=open(ivt_path+'/log.state',"w",encoding='utf-8')
+            logst.close()
             fields="["
             for fld in (inventories[inventory]):
                 fields+="\""+fld+"\""
@@ -180,7 +189,8 @@ def create_database(name,path,db_format,inventories):
         shutil.rmtree(path)
 
 def open_database(path):
-    s.db_instance=False
+    close_database()
+    time.sleep(1)
     s.db=Database(path)
     s.db_instance=True
 
