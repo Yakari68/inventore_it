@@ -20,6 +20,6 @@ if __name__=="__main__":
     ctk.set_appearance_mode("light") # System, light, dark
     ctk.set_default_color_theme("blue")
     app = window()
-    app.after(1000, lambda: test_display_on_right_frame(app))
-    app.after(1000, lambda: test_display_on_left_bottom(app))
+#     app.after(1000, lambda: test_display_on_right_frame(app))
+#     app.after(1000, lambda: test_display_on_left_bottom(app))
     app.mainloop()

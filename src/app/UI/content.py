@@ -11,14 +11,18 @@ class main_app(ctk.CTkFrame):
         super().__init__(master)
         self.grid(sticky="nsew")
         self.logo_path = "./app/UI/assets/icons/icon256x256.png"
+        self.active_windows={}
+        #Content
+        self.top_bar=None
         self.right_frame=None
         self.left_bottom=None
         self.splitted_window = None
         self.tabview = None
+        #Local save to conserve panels sizes
         self.previous_height=0
         self.previous_width=0
 
-        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(0, weight=0, minsize=0)
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
         
@@ -35,6 +39,19 @@ class main_app(ctk.CTkFrame):
     def clear(self):
         for widget in self.winfo_children():
             widget.destroy()
+
+    def update_visibility(self):
+        if self.left_bottom:
+            if len(self.left_bottom.winfo_children()) == 0:
+                self.left_paned.forget(self.left_bottom)
+            elif self.left_bottom not in self.left_paned.panes():
+                self.left_paned.add(self.left_bottom)
+        if self.right_frame:
+            if len(self.right_frame.winfo_children()) == 0:
+                if self.right_frame in self.splitted_window.panes():
+                    self.splitted_window.forget(self.right_frame)
+            elif self.right_frame not in self.splitted_window.panes():
+                self.splitted_window.add(self.right_frame)
 
     def show_logo(self):
         frame = ctk.CTkFrame(self)
@@ -53,49 +70,54 @@ class main_app(ctk.CTkFrame):
 ### Top split: tabs and tabs content
 ### Bottom split: default empty and doesn't show
 # Build right panel: default empty and doesn't show
-        pass
-
     def show_ui(self):
-        self.top_bar=ctk.CTkFrame(self)
-        self.top_bar.grid(sticky="nsew", row=0)
-        
+        self.top_bar = ctk.CTkFrame(self)
+        new_db_btn = ctk.CTkButton(self.top_bar, text="Test")
+        new_db_btn.pack(side="left")
+        self.top_bar.grid_propagate(True)
+        self.top_bar.grid(row=0, column=0, sticky="nsew")
+
         self.splitted_window = tk.PanedWindow(self, orient="horizontal")
         
-        left_frame = ctk.CTkFrame(self.splitted_window)
-        left_paned = tk.PanedWindow(left_frame, orient="vertical")
-        left_top = ctk.CTkFrame(left_paned)
-        
-        self.tabview = Tabs(left_top)
+        self.left_frame = ctk.CTkFrame(self.splitted_window)
+        self.left_paned = tk.PanedWindow(self.left_frame, orient="vertical")
+
+        self.left_top = ctk.CTkFrame(self.left_paned)
+        self.tabview = Tabs(self.left_top)
         self.tabview.pack(fill="both", expand=True)
-        
-        left_paned.add(left_top)
-        
-        
-        self.left_bottom = ctk.CTkFrame(left_paned)
-        left_paned.add(self.left_bottom)
-        left_paned.pack(expand=True, fill='both')
-        
-        
+
+        self.left_paned.add(self.left_top)
+
+        self.left_bottom = ctk.CTkFrame(self.left_paned)
+        self.left_paned.add(self.left_bottom)
+
+        self.left_paned.pack(expand=True, fill='both')
+
         self.right_frame = ctk.CTkFrame(self.splitted_window)
-        self.splitted_window.add(left_frame)
+
+        self.splitted_window.add(self.left_frame)
         self.splitted_window.add(self.right_frame)
-        self.splitted_window.grid(sticky="nsew", row=1)
-        self.after(100, self.adjust_sashes, left_paned, self.splitted_window)
+        self.splitted_window.grid(row=1, column=0, sticky="nsew")
 
-    def adjust_sashes(self, left_paned, main_paned):
-        left_paned.update_idletasks()
-        height = left_paned.winfo_height()
-        
-        if not height==self.previous_height:
-            self.previous_height=height
+        self.after(100, self.adjust_sashes)
+
+    def adjust_sashes(self):
+        self.left_paned.update_idletasks()
+        height = self.left_paned.winfo_height()
+
+        if height != self.previous_height:
+            self.previous_height = height
             top_height = int(height * 0.7)
-            left_paned.sash_place(0, 0, top_height)
+            self.left_paned.sash_place(0, 0, top_height)
 
-        main_paned.update_idletasks()
-        width = main_paned.winfo_width()
-        if not width==self.previous_width:
-            self.previous_width=width
+        self.splitted_window.update_idletasks()
+        width = self.splitted_window.winfo_width()
+
+        if width != self.previous_width:
+            self.previous_width = width
             left_width = int(width * 0.7)
-            main_paned.sash_place(0, left_width, 0)
-    
-        self.after(100, self.adjust_sashes, left_paned, self.splitted_window)
+            self.splitted_window.sash_place(0, left_width, 0)
+
+        self.update_visibility()
+
+        self.after(100, self.adjust_sashes)
